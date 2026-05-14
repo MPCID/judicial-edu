@@ -1,100 +1,26 @@
-<!DOCTYPE html>
-<html lang="zh-TW">
-<head>
-<meta charset="UTF-8"/>
-<meta name="viewport" content="width=device-width,initial-scale=1.0"/>
-<title>破曉計畫｜部隊戰術詢問整合系統</title>
-<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+TC:wght@700;900&family=Noto+Sans+TC:wght@400;500;700&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
-<script src="https://unpkg.com/docx@7.1.0/build/index.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/FileSaver.js/2.0.5/FileSaver.min.js"></script>
-<style>
-:root{--bg:#0a0c0f;--sur:#111418;--bor:#252a32;--gold:#c8a96e;--gold2:#e8c98e;--text:#e8eaf0;--muted:#8892a0;}
-*{box-sizing:border-box;margin:0;padding:0;}
-body{background:var(--bg);color:var(--text);font-family:'Noto Sans TC',sans-serif;min-height:100vh;}
-.mono{font-family:'JetBrains Mono',monospace;}
-.tabs{display:flex;background:var(--sur);border-bottom:1px solid var(--bor);padding:0 20px;}
-.tab-btn{padding:15px 25px;cursor:pointer;border:none;background:none;color:var(--muted);font-weight:700;font-size:14px;transition:0.3s;position:relative;}
-.tab-btn.active{color:var(--gold2);}
-.tab-btn.active::after{content:"";position:absolute;bottom:0;left:0;width:100%;height:2px;background:var(--gold);}
-.content-section{display:none;max-width:1000px;margin:30px auto;padding:0 20px;}
-.content-section.active{display:block;}
-.card{background:var(--sur);border:1px solid var(--bor);border-radius:8px;padding:25px;margin-bottom:20px;}
-textarea{width:100%;height:180px;background:#050607;color:#fff;border:1px solid var(--bor);padding:15px;border-radius:4px;font-size:15px;line-height:1.6;margin-bottom:15px;}
-.btn-group{display:flex;gap:10px;margin-bottom:15px;}
-.btn-sm{flex:1;padding:8px;font-size:12px;cursor:pointer;background:#181c22;color:var(--text);border:1px solid var(--bor);border-radius:4px;}
-.btn-sm:hover{border-color:var(--gold);}
-.btn-main{background:linear-gradient(135deg,#b8944a,#c8a96e);color:#000;border:none;padding:18px;font-weight:900;cursor:pointer;width:100%;border-radius:4px;font-size:16px;letter-spacing:1px;}
-.btn-link{display:inline-block;margin-top:20px;color:var(--gold2);text-decoration:none;border:1px solid var(--gold);padding:12px 24px;border-radius:4px;font-weight:700;}
-</style>
-</head>
-<body>
-
-<nav style="background:#000; padding:15px 25px; border-bottom:1px solid var(--bor);">
-    <div style="display:flex; align-items:center; gap:15px;">
-        <div style="font-size:24px;">🛡</div>
-        <div>
-            <p class="mono" style="font-size:10px; color:var(--gold); letter-spacing:3px;">TACTICAL TRAINING INTEGRATION</p>
-            <h1 style="font-size:18px;">破曉計畫：偵查實務綜合演練系統</h1>
-        </div>
-    </div>
-</nav>
-
-<div class="tabs">
-    <button class="tab-btn active" onclick="showTab('daybreak')">第一階段：戰術詢問演練</button>
-    <button class="tab-btn" onclick="showTab('ai-analysis')">第二階段：AI 分析門戶</button>
-</div>
-
-<section id="daybreak" class="content-section active">
-    <div class="card">
-        <h3 style="color:var(--gold2); margin-bottom:10px;">隨機模擬案情產生器</h3>
-        <p style="font-size:12px; color:var(--muted); margin-bottom:15px;">請點選難度，或直接在下方輸入詢問紀錄：</p>
-        <div class="btn-group">
-            <button class="btn-sm" onclick="generateCase('easy')">簡單 (一般違紀)</button>
-            <button class="btn-sm" onclick="generateCase('medium')">中等 (洩密疑雲)</button>
-            <button class="btn-sm" onclick="generateCase('hard')">困難 (敵諜滲透)</button>
-        </div>
-        <textarea id="intelNote" placeholder="點擊上方隨機產生案情，或在此紀錄您的詢問重點..."></textarea>
-        <button class="btn-main" onclick="exportDoc()">下載：破曉計畫詢問紀錄書 (Word)</button>
-    </div>
-</section>
-
-<section id="ai-analysis" class="content-section">
-    <div class="card" style="text-align:center; padding:40px 20px;">
-        <h2 style="color:var(--gold2); margin-bottom:20px;">法律構成要件深度鑑定</h2>
-        <p style="font-size:14px; color:var(--muted); line-height:1.8; margin-bottom:30px;">
-            請複製您的紀錄內容，前往正式版系統使用 AI 進行法律分析。
-        </p>
-        <a href="https://judicial-system-phi.vercel.app/" target="_blank" class="btn-link">➔ 進入：智慧偵詢正式版系統</a>
-    </div>
-</section>
-
 <script>
-const cases = {
-    easy: "【一般違紀案例】\n甲員於晚間點名後，私自攜帶手機進入宿舍，神色慌張。請詢問其使用動機及是否拍攝敏感設施。",
-    medium: "【洩密疑雲案例】\n乙中士負責演習序列管理，被發現曾對機密文件進行拍攝。請突破心防詢問照片流向。",
-    hard: "【敵諜滲透案例】\n丙士官長持加密磁碟進入限制區域。詢問時表現出高度反偵察特質，請嘗試找出其陳述矛盾點。"
-};
+function generateRandomCase() {
+    const roles = ["通信營上兵", "退撫基金繳費承辦人員", "作戰科士官長", "雷達站技術員", "門禁管制哨兵"];
+    const actions = [
+        "於機房私自操作非核定資通系統", 
+        "因疏忽遲辦退撫基金撥補，致生國庫利息損失", 
+        "於演習期間未依規定封存機密檔案", 
+        "將公務用加密裝置私自攜離營區", 
+        "未經核准私自更改軍網目錄服務系統權限"
+    ];
+    const outcomes = [
+        "涉嫌違反《國軍資通安全獎懲規定》。",
+        "涉及《陸海空軍刑法》洩漏軍事機密罪。",
+        "可能面臨行政懲處及損害賠償責任。",
+        "觸犯國家機密保護法相關刑責。",
+        "依軍紀監察程序需移送學員生事務處調查。"
+    ];
 
-function generateCase(level) { document.getElementById('intelNote').value = cases[level]; }
-function showTab(tabId) {
-    document.querySelectorAll('.content-section').forEach(s => s.classList.remove('active'));
-    document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
-    document.getElementById(tabId).classList.add('active');
-    event.currentTarget.classList.add('active');
-}
+    const r = roles[Math.floor(Math.random() * roles.length)];
+    const a = actions[Math.floor(Math.random() * actions.length)];
+    const o = outcomes[Math.floor(Math.random() * outcomes.length)];
 
-async function exportDoc() {
-    const { Document, Packer, Paragraph } = docx;
-    const doc = new Document({
-        sections: [{
-            children: [
-                new Paragraph({ text: "破曉計畫：戰術詢問演練紀錄", heading: docx.HeadingLevel.HEADING_1 }),
-                new Paragraph({ text: "\n" + document.getElementById('intelNote').value })
-            ]
-        }]
-    });
-    Packer.toBlob(doc).then(blob => { saveAs(blob, "破曉計畫_紀錄.docx"); });
+    const finalCase = `【破曉計畫 - 隨機案例】\n\n對象：${r}\n情節：${r}${a}。\n\n任務：請詢問其動機，並記錄是否符合行政過失或刑事犯罪之構成要件。該員供述之違失事實：_________________`;
+    document.getElementById('intelNote').value = finalCase;
 }
 </script>
-</body>
-</html>
