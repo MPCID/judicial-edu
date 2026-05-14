@@ -3,86 +3,103 @@
 <head>
 <meta charset="UTF-8"/>
 <meta name="viewport" content="width=device-width,initial-scale=1.0"/>
-<title>破曉計畫｜部隊戰術詢問與法規演練系統</title>
+<title>破曉計畫｜刑事偵查與軍法演練系統</title>
 <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+TC:wght@700;900&family=Noto+Sans+TC:wght@400;500;700&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
 <script src="https://unpkg.com/docx@7.1.0/build/index.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/FileSaver.js/2.0.5/FileSaver.min.js"></script>
 <style>
-:root{--bg:#0a0c0f;--sur:#111418;--bor:#252a32;--gold:#c8a96e;--gold2:#e8c98e;--text:#e8eaf0;--muted:#8892a0;}
+:root{--bg:#0a0c0f;--sur:#111418;--bor:#252a32;--gold:#c8a96e;--gold2:#e8c98e;--text:#e8eaf0;--muted:#8892a0;--blue:#4a90d9;}
 *{box-sizing:border-box;margin:0;padding:0;}
 body{background:var(--bg);color:var(--text);font-family:'Noto Sans TC',sans-serif;min-height:100vh;}
 .mono{font-family:'JetBrains Mono',monospace;}
+
+/* Header & Tabs */
+header{background:#000;padding:20px;border-bottom:1px solid var(--bor);display:flex;justify-content:space-between;align-items:center;}
 .tabs{display:flex;background:var(--sur);border-bottom:1px solid var(--bor);padding:0 20px;}
 .tab-btn{padding:15px 25px;cursor:pointer;border:none;background:none;color:var(--muted);font-weight:700;font-size:14px;transition:0.3s;position:relative;}
 .tab-btn.active{color:var(--gold2);}
 .tab-btn.active::after{content:"";position:absolute;bottom:0;left:0;width:100%;height:2px;background:var(--gold);}
+
+/* Content */
 .content-section{display:none;max-width:1000px;margin:30px auto;padding:0 20px;}
 .content-section.active{display:block;}
 .card{background:var(--sur);border:1px solid var(--bor);border-radius:8px;padding:25px;margin-bottom:20px;box-shadow:0 10px 30px rgba(0,0,0,0.5);}
-textarea{width:100%;height:220px;background:#050607;color:#fff;border:1px solid var(--bor);padding:18px;border-radius:4px;font-size:15px;line-height:1.7;margin-bottom:15px;outline:none;}
-.btn-gen{background:#1a1d23;color:var(--gold2);border:1px solid var(--gold);padding:12px;cursor:pointer;width:100%;border-radius:4px;font-weight:700;margin-bottom:20px;letter-spacing:1px;}
+
+/* Elements */
+.tag{background:rgba(200,169,110,0.1);color:var(--gold2);padding:3px 8px;font-size:10px;font-weight:700;border-radius:2px;margin-bottom:10px;display:inline-block;border:1px solid rgba(200,169,110,0.3);}
+textarea{width:100%;height:350px;background:#050607;color:#fff;border:1px solid var(--bor);padding:18px;border-radius:4px;font-size:15px;line-height:1.7;margin-bottom:15px;outline:none;font-family:inherit;}
+
+/* Buttons */
+.btn-gen{background:#1a1d23;color:var(--gold2);border:1px solid var(--gold);padding:14px;cursor:pointer;width:100%;border-radius:4px;font-weight:700;margin-bottom:20px;transition:0.2s;}
 .btn-gen:hover{background:var(--gold);color:#000;}
 .btn-main{background:linear-gradient(135deg,#b8944a,#c8a96e);color:#000;border:none;padding:18px;font-weight:900;cursor:pointer;width:100%;border-radius:4px;font-size:16px;letter-spacing:1px;}
-.tag{background:rgba(200,169,110,0.1);color:var(--gold2);padding:3px 8px;font-size:10px;font-weight:700;border-radius:2px;margin-bottom:10px;display:inline-block;border:1px solid rgba(200,169,110,0.3);}
 </style>
 </head>
 <body>
 
-<nav style="background:#000; padding:15px 25px; border-bottom:1px solid var(--bor); display:flex; justify-content:space-between; align-items:center;">
-    <h1 style="font-size:18px; color:var(--gold); font-weight:900;">破曉計畫：部隊反情報與行政演練系統</h1>
-    <span class="mono" style="font-size:10px; color:var(--muted);">OPERATION DAYBREAK V2.0</span>
-</nav>
+<header>
+    <div>
+        <h1 style="font-size:18px; color:var(--gold); font-weight:900;">破曉計畫：刑事偵查與軍法演習系統</h1>
+        <p class="mono" style="font-size:10px; color:var(--muted);">OPERATION DAYBREAK V3.0 | TAIPEI MP</p>
+    </div>
+</header>
 
 <div class="tabs">
-    <button class="tab-btn active" onclick="showTab('daybreak')">第一階段：動態案例演練</button>
-    <button class="tab-btn" onclick="showTab('ai-analysis')">第二階段：AI 分析門戶</button>
+    <button class="tab-btn active" onclick="showTab('simulator')">第一階段：案例生成演練</button>
+    <button class="tab-btn" onclick="showTab('portal')">第二階段：AI 分析門戶</button>
 </div>
 
-<section id="daybreak" class="content-section active">
+<section id="simulator" class="content-section active">
     <div class="card">
-        <span class="tag">DYNAMIC CASE GENERATOR</span>
-        <button class="btn-gen" onclick="generateRandomCase()">➔ 隨機生成部隊違紀/國安模擬案例</button>
+        <span class="tag">CRIMINAL CASE GENERATOR</span>
+        <button class="btn-gen" onclick="generateRandomCase()">➔ 生成隨機刑事案件 (刑法/軍法)</button>
         
-        <h3 style="color:var(--gold2); margin-bottom:10px; font-size:16px;">詢問紀錄書 (含行政與刑事事實)</h3>
-        <textarea id="intelNote" placeholder="請點擊上方按鈕生成案例，或紀錄受詢者的回答矛盾點..."></textarea>
+        <h3 style="color:var(--gold2); margin-bottom:10px; font-size:16px;">詢問紀錄與事實清查書</h3>
+        <textarea id="intelNote" placeholder="點擊按鈕生成隨機案例，開始模擬詢問演練..."></textarea>
         
-        <button class="btn-main" onclick="exportDoc()">產出報告紀錄 (Word)</button>
+        <button class="btn-main" onclick="exportDoc()">匯出演練紀錄 (Word)</button>
     </div>
 </section>
 
-<section id="ai-analysis" class="content-section">
-    <div class="card" style="text-align:center; padding:50px 20px;">
-        <h2 style="color:var(--gold2); margin-bottom:20px;">法律與行政處分深度分析</h2>
+<section id="portal" class="content-section">
+    <div class="card" style="text-align:center; padding:60px 20px;">
+        <h2 style="color:var(--gold2); margin-bottom:20px;">法律鑑定分析</h2>
         <p style="color:var(--muted); margin-bottom:30px; line-height:1.8;">
-            請複製第一階段的「詢問紀錄」，前往正式版系統。<br>AI 將依據《陸海空軍刑法》與《國防部組織法》進行法律與行政鑑定。
+            請複製演練紀錄，前往正式版系統。<br>AI 將依據《陸海空軍刑法》、《刑事訴訟法》與《114年資安獎懲規定》進行深度鑑定。
         </p>
-        <a href="https://judicial-system-phi.vercel.app/" target="_blank" style="color:var(--gold2); text-decoration:none; border:1px solid var(--gold); padding:12px 24px; border-radius:4px; font-weight:700;">➔ 進入：智慧偵詢正式版系統</a>
+        <a href="https://judicial-system-phi.vercel.app/" target="_blank" style="display:inline-block; color:var(--gold2); text-decoration:none; border:1px solid var(--gold); padding:12px 30px; border-radius:4px; font-weight:700;">➔ 進入：智慧偵詢分析系統</a>
     </div>
 </section>
 
 <script>
 function generateRandomCase() {
-    const roles = ["通信營上兵", "旅部人事次長室承辦人", "負責退撫基金之出納人員", "雷達站技術員", "門禁管制哨兵"];
+    // 角色設定
+    const roles = ["資通電軍中尉", "憲兵隊上等兵", "機步營中士班長", "後勤處少校承辦官", "營區外包商技術員"];
+    
+    // 刑事案情設定 (對應刑法、軍法、特別法)
     const actions = [
-        "於機房私自操作非核定資通系統，導致目錄服務異常", 
-        "因個人疏漏遲辦退撫基金撥補，致生國庫利息損失責任", 
-        "於演習期間未依規定封存機密檔案並私自拍攝", 
-        "擅自更改軍網權限設定並下載不明來源檔案", 
-        "被發現於營外與身分不明人士密集餐敘且帳戶有不明匯款"
+        "私帶大陸廠牌手機進入管制機房，並對作業系統畫面進行多次拍照與即時上傳", 
+        "於收假返營時遭哨所攔檢，車內散發異味且尿液檢測呈現大麻陽性反應", 
+        "在寢室置物櫃內藏匿多枚含『依托咪酯』成分之電子菸彈，涉嫌營內施用毒品", 
+        "辦理軍品採購時，私下收受廠商贈送之未核准手機，並將其非法攜入辦公區使用", 
+        "不服管教於臉書公開辱罵官長，並在約談過程中踢翻辦公設備試圖恐嚇"
     ];
+
+    // 調查發現之核心線索
     const clues = [
-        "現場發現其持有未經核准之加密儲存裝置。",
-        "該員對關鍵時間點（2200-2400）之行蹤交代不清。",
-        "監視紀錄顯示其曾規避哨所檢查點。",
-        "其電腦紀錄中存有大量非權責範圍內之公務文件副本。",
-        "經督察部門清查，其對退撫基金繳費流程供述與規定完全不符。"
+        "經查該手機內存有大量未經核准之管制區內部設施照片。",
+        "該員供述行蹤與營區門禁系統紀錄有明顯 3 小時落差，疑似規避檢查。",
+        "其通訊軟體內發現與身分不明人士之交易對話，涉及不明匯款紀錄。",
+        "現場查獲之設備未安裝 MDM，且已自動連通外部不明 Wi-Fi 訊號。",
+        "該員拒絕配合尿液採驗，並聲稱受人誣陷，態度極端不配合。"
     ];
 
     const r = roles[Math.floor(Math.random() * roles.length)];
     const a = actions[Math.floor(Math.random() * actions.length)];
     const c = clues[Math.floor(Math.random() * clues.length)];
 
-    const finalCase = `【破曉計畫 - 模擬演習案例】\n\n受詢對象：${r}\n情節：${r}${a}。${c}\n\n詢問官指令：請詢問其動機，並分析其行為是否涉及行政過失（依據軍紀監察規定）或刑事洩密犯罪。`;
+    const finalCase = `【破曉計畫 - 刑事偵查演練】\n\n對象：${r}\n案情事實：${r}${a}。${c}\n\n任務要求：\n1. 判定行為是否涉及《陸海空軍刑法》或《毒品危害防制條例》。\n2. 依據《114年資通安全獎懲規定》判定其資安處分級距（申誡/記過/大過）。\n3. 針對偵查程序（搜索、尿檢、時限）擬定後續作為。`;
+
     document.getElementById('intelNote').value = finalCase;
 }
 
@@ -94,18 +111,19 @@ function showTab(t) {
 }
 
 async function exportDoc() {
-    const { Document, Packer, Paragraph, HeadingLevel } = docx;
+    const { Document, Packer, Paragraph, HeadingLevel, TextRun } = docx;
     const note = document.getElementById('intelNote').value;
     const doc = new Document({
         sections: [{
             children: [
-                new Paragraph({ text: "破曉計畫：戰術詢問與法規清查紀錄", heading: HeadingLevel.HEADING_1 }),
+                new Paragraph({ text: "破曉計畫：刑事演練紀錄書", heading: HeadingLevel.HEADING_1 }),
                 new Paragraph({ text: "\n" }),
-                new Paragraph({ text: note })
+                new Paragraph({ children: [new TextRun({ text: note, font: "Noto Sans TC" })] })
             ]
         }]
     });
-    Packer.toBlob(doc).then(blob => { saveAs(blob, "破曉計畫_訓練紀錄.docx"); });
+    const blob = await Packer.toBlob(doc);
+    saveAs(blob, `破曉計畫_演練紀錄_${new Date().toLocaleDateString()}.docx`);
 }
 </script>
 </body>
