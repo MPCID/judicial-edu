@@ -93,7 +93,7 @@ function generateRandomCase() {
     const a = actions[Math.floor(Math.random() * actions.length)];
     const c = clues[Math.floor(Math.random() * clues.length)];
 
-    const finalCase = `【破曉計畫 - 刑事演練紀錄】\n\n受詢對象：${r}\n案情事實：${r}${a}。${c}\n\n任務重點：\n1. 判斷是否適用《陸海空軍刑法》或特別法（毒品、貪污、公危）。\n2. 依據《114年資安獎懲規定》判定其資安處分級距（申誡/記過/大過）。\n3. 評估其行為對軍事安全之損害，並擬定偵查作為建議。`;
+    const finalCase = `【破曉計畫 - 刑事演練紀錄】\n\n受詢對象：${r}\n案情事實：${r}${a}。${c}\n\n任務重點：\n1. 判斷是否適用《陸海空軍刑法》或特別法（毒品、貪污、公危）。\n2. 依據《資安獎懲規定》判定其資安處分級距（申誡/記過/大過）。\n3. 評估其行為對軍事安全之損害，並擬定偵查作為建議。`;
 
     document.getElementById('intelNote').value = finalCase;
 }
