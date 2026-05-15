@@ -10,37 +10,37 @@
 <style>
 :root{--bg:#0a0c0f;--sur:#111418;--bor:#252a32;--gold:#c8a96e;--gold2:#e8c98e;--text:#e8eaf0;--muted:#8892a0;--blue:#4a90d9;}
 *{box-sizing:border-box;margin:0;padding:0;}
-body{background:var(--bg);color:var(--text);font-family:'Noto Sans TC',sans-serif;min-height:100vh;}
+body{background:var(--bg);color:var(--text);font-family:'Noto Sans TC',sans-serif;min-height:100vh;font-size:16pt;} /* 系統字體放大至 16pt */
 .mono{font-family:'JetBrains Mono',monospace;}
 
 /* Header & Tabs */
-header{background:#000;padding:20px;border-bottom:1px solid var(--bor);display:flex;justify-content:space-between;align-items:center;}
+header{background:#000;padding:25px;border-bottom:1px solid var(--bor);display:flex;justify-content:space-between;align-items:center;}
 .tabs{display:flex;background:var(--sur);border-bottom:1px solid var(--bor);padding:0 20px;}
-.tab-btn{padding:15px 25px;cursor:pointer;border:none;background:none;color:var(--muted);font-weight:700;font-size:14px;transition:0.3s;position:relative;}
+.tab-btn{padding:15px 25px;cursor:pointer;border:none;background:none;color:var(--muted);font-weight:700;font-size:16pt;transition:0.3s;position:relative;}
 .tab-btn.active{color:var(--gold2);}
-.tab-btn.active::after{content:"";position:absolute;bottom:0;left:0;width:100%;height:2px;background:var(--gold);}
+.tab-btn.active::after{content:"";position:absolute;bottom:0;left:0;width:100%;height:3px;background:var(--gold);}
 
 /* Content */
-.content-section{display:none;max-width:1000px;margin:30px auto;padding:0 20px;}
+.content-section{display:none;max-width:1200px;margin:40px auto;padding:0 20px;}
 .content-section.active{display:block;}
-.card{background:var(--sur);border:1px solid var(--bor);border-radius:8px;padding:25px;margin-bottom:20px;box-shadow:0 10px 30px rgba(0,0,0,0.5);}
+.card{background:var(--sur);border:1px solid var(--bor);border-radius:8px;padding:30px;margin-bottom:20px;box-shadow:0 10px 40px rgba(0,0,0,0.6);}
 
 /* Elements */
-.tag{background:rgba(200,169,110,0.1);color:var(--gold2);padding:3px 8px;font-size:10px;font-weight:700;border-radius:2px;margin-bottom:10px;display:inline-block;border:1px solid rgba(200,169,110,0.3);}
-textarea{width:100%;height:350px;background:#050607;color:#fff;border:1px solid var(--bor);padding:18px;border-radius:4px;font-size:15px;line-height:1.7;margin-bottom:15px;outline:none;font-family:inherit;}
+.tag{background:rgba(200,169,110,0.1);color:var(--gold2);padding:5px 12px;font-size:13pt;font-weight:700;border-radius:2px;margin-bottom:15px;display:inline-block;border:1px solid rgba(200,169,110,0.3);}
+textarea{width:100%;height:500px;background:#050607;color:#fff;border:1px solid var(--bor);padding:20px;border-radius:4px;font-size:16pt;line-height:1.7;margin-bottom:20px;outline:none;font-family:inherit;}
 
 /* Buttons */
-.btn-gen{background:#1a1d23;color:var(--gold2);border:1px solid var(--gold);padding:14px;cursor:pointer;width:100%;border-radius:4px;font-weight:700;margin-bottom:20px;transition:0.2s;}
+.btn-gen{background:#1a1d23;color:var(--gold2);border:1px solid var(--gold);padding:18px;cursor:pointer;width:100%;border-radius:4px;font-weight:700;font-size:16pt;margin-bottom:25px;transition:0.2s;}
 .btn-gen:hover{background:var(--gold);color:#000;}
-.btn-main{background:linear-gradient(135deg,#b8944a,#c8a96e);color:#000;border:none;padding:18px;font-weight:900;cursor:pointer;width:100%;border-radius:4px;font-size:16px;letter-spacing:1px;}
+.btn-main{background:linear-gradient(135deg,#b8944a,#c8a96e);color:#000;border:none;padding:22px;font-weight:900;cursor:pointer;width:100%;border-radius:4px;font-size:18pt;letter-spacing:1px;}
 </style>
 </head>
 <body>
 
 <header>
     <div>
-        <h1 style="font-size:18px; color:var(--gold); font-weight:900;">破曉計畫：刑事偵查與軍法演習系統</h1>
-        <p class="mono" style="font-size:10px; color:var(--muted);">OPERATION DAYBREAK V3.0 | TAIPEI MP</p>
+        <h1 style="font-size:24pt; color:var(--gold); font-weight:900;">破曉計畫：刑事偵查與軍法演習系統</h1>
+        <p class="mono" style="font-size:12pt; color:var(--muted);">OPERATION DAYBREAK V4.0 | FONT_SIZE: 16PT</p>
     </div>
 </header>
 
@@ -52,53 +52,53 @@ textarea{width:100%;height:350px;background:#050607;color:#fff;border:1px solid 
 <section id="simulator" class="content-section active">
     <div class="card">
         <span class="tag">CRIMINAL CASE GENERATOR</span>
-        <button class="btn-gen" onclick="generateRandomCase()">➔ 生成隨機刑事案件 (刑法/軍法)</button>
+        <button class="btn-gen" onclick="generateRandomCase()">➔ 生成隨機刑事模擬案例</button>
         
-        <h3 style="color:var(--gold2); margin-bottom:10px; font-size:16px;">詢問紀錄與事實清查書</h3>
-        <textarea id="intelNote" placeholder="點擊按鈕生成隨機案例，開始模擬詢問演練..."></textarea>
+        <h3 style="color:var(--gold2); margin-bottom:15px; font-size:18pt;">詢問紀錄與事實清查書 (16pt)</h3>
+        <textarea id="intelNote" placeholder="點擊按鈕生成案例..."></textarea>
         
-        <button class="btn-main" onclick="exportDoc()">匯出演練紀錄 (Word)</button>
+        <button class="btn-main" onclick="exportDoc()">匯出演練紀錄 (16pt Word)</button>
     </div>
 </section>
 
 <section id="portal" class="content-section">
-    <div class="card" style="text-align:center; padding:60px 20px;">
-        <h2 style="color:var(--gold2); margin-bottom:20px;">法律鑑定分析</h2>
-        <p style="color:var(--muted); margin-bottom:30px; line-height:1.8;">
-            請複製演練紀錄，前往正式版系統。<br>AI 將依據《陸海空軍刑法》、《刑事訴訟法》與《114年資安獎懲規定》進行深度鑑定。
+    <div class="card" style="text-align:center; padding:80px 20px;">
+        <h2 style="color:var(--gold2); margin-bottom:30px; font-size:24pt;">法律鑑定分析門戶</h2>
+        <p style="color:var(--muted); margin-bottom:40px; line-height:1.8; font-size:16pt;">
+            請複製演練紀錄，前往正式版系統。<br>AI 將依據全量法規庫進行鑑定。
         </p>
-        <a href="https://judicial-system-phi.vercel.app/" target="_blank" style="display:inline-block; color:var(--gold2); text-decoration:none; border:1px solid var(--gold); padding:12px 30px; border-radius:4px; font-weight:700;">➔ 進入：智慧偵詢分析系統</a>
+        <a href="https://judicial-system-phi.vercel.app/" target="_blank" style="display:inline-block; color:var(--gold2); text-decoration:none; border:1px solid var(--gold); padding:15px 40px; border-radius:4px; font-weight:700; font-size:16pt;">➔ 進入正式版系統</a>
     </div>
 </section>
 
 <script>
 function generateRandomCase() {
-    // 角色設定
-    const roles = ["資通電軍中尉", "憲兵隊上等兵", "機步營中士班長", "後勤處少校承辦官", "營區外包商技術員"];
+    const roles = ["後勤處少尉承辦人", "憲兵隊中士組長", "機動營上等兵", "通信大隊士官長", "營區駐點商人員"];
     
-    // 刑事案情設定 (對應刑法、軍法、特別法)
+    // 擴充案例池，涵蓋更多刑事與資安複合情節
     const actions = [
-        "私帶大陸廠牌手機進入管制機房，並對作業系統畫面進行多次拍照與即時上傳", 
-        "於收假返營時遭哨所攔檢，車內散發異味且尿液檢測呈現大麻陽性反應", 
-        "在寢室置物櫃內藏匿多枚含『依托咪酯』成分之電子菸彈，涉嫌營內施用毒品", 
-        "辦理軍品採購時，私下收受廠商贈送之未核准手機，並將其非法攜入辦公區使用", 
-        "不服管教於臉書公開辱罵官長，並在約談過程中踢翻辦公設備試圖恐嚇"
+        "於休假期間在博弈網站投注大額賭資，遭警方循線查獲並移送", 
+        "假期間酒後駕車發生擦撞，試圖透過同袍關係向處理警員關說遭拒", 
+        "利用深夜值勤時間，私自將公務筆電攜至營區死角連線私人熱點", 
+        "被檢舉多次將單位列管之消耗性軍品私自上網拍賣牟利", 
+        "為報復上級督導不周，故意於軍網目錄系統植入惡意停機程式",
+        "私自帶入大陸廠牌手機入營，且於寢室錄製部隊生活影片上傳抖音",
+        "遭毒品查緝小組於隨身行李中搜出含『喪屍煙彈』成分之不明電子菸"
     ];
 
-    // 調查發現之核心線索
     const clues = [
-        "經查該手機內存有大量未經核准之管制區內部設施照片。",
-        "該員供述行蹤與營區門禁系統紀錄有明顯 3 小時落差，疑似規避檢查。",
-        "其通訊軟體內發現與身分不明人士之交易對話，涉及不明匯款紀錄。",
-        "現場查獲之設備未安裝 MDM，且已自動連通外部不明 Wi-Fi 訊號。",
-        "該員拒絕配合尿液採驗，並聲稱受人誣陷，態度極端不配合。"
+        "經查其手機相簿內留有大量博弈帳號交易截圖與對帳單。",
+        "該員酒測值高達 0.55mg/L，且拒不配合製作筆錄，態度傲慢。",
+        "資安紀錄顯示其帳號有異常大量外聯封包，且 IP 來自境外區域。",
+        "現場查獲該員持有多支大陸廠牌智慧型手機，且均未安裝 MDM 軟體。",
+        "該員供述與多名同袍有金錢借貸往來，且帳戶出現不明海外匯入款。"
     ];
 
     const r = roles[Math.floor(Math.random() * roles.length)];
     const a = actions[Math.floor(Math.random() * actions.length)];
     const c = clues[Math.floor(Math.random() * clues.length)];
 
-    const finalCase = `【破曉計畫 - 刑事偵查演練】\n\n對象：${r}\n案情事實：${r}${a}。${c}\n\n任務要求：\n1. 判定行為是否涉及《陸海空軍刑法》或《毒品危害防制條例》。\n2. 依據《114年資通安全獎懲規定》判定其資安處分級距（申誡/記過/大過）。\n3. 針對偵查程序（搜索、尿檢、時限）擬定後續作為。`;
+    const finalCase = `【破曉計畫 - 刑事演練紀錄】\n\n受詢對象：${r}\n案情事実：${r}${a}。${c}\n\n任務重點：\n1. 判斷是否適用《陸海空軍刑法》或特別法（毒品、貪污、公危）。\n2. 依據《114年資安獎懲規定》判定其資安處分級距（申誡/記過/大過）。\n3. 評估其行為對軍事安全之損害，並擬定偵查作為建議。\n\n紀錄官署名：_________________`;
 
     document.getElementById('intelNote').value = finalCase;
 }
@@ -116,14 +116,30 @@ async function exportDoc() {
     const doc = new Document({
         sections: [{
             children: [
-                new Paragraph({ text: "破曉計畫：刑事演練紀錄書", heading: HeadingLevel.HEADING_1 }),
+                new Paragraph({ 
+                    children: [
+                        new TextRun({ 
+                            text: "破曉計畫：刑事演練與法規鑑定紀錄", 
+                            bold: true, 
+                            size: 48 // 24pt (48 half-points)
+                        })
+                    ]
+                }),
                 new Paragraph({ text: "\n" }),
-                new Paragraph({ children: [new TextRun({ text: note, font: "Noto Sans TC" })] })
+                new Paragraph({ 
+                    children: [
+                        new TextRun({ 
+                            text: note, 
+                            font: "Noto Sans TC",
+                            size: 32 // 16pt (32 half-points)
+                        })
+                    ]
+                })
             ]
         }]
     });
     const blob = await Packer.toBlob(doc);
-    saveAs(blob, `破曉計畫_演練紀錄_${new Date().toLocaleDateString()}.docx`);
+    saveAs(blob, `演練紀錄_16pt_${new Date().toLocaleDateString()}.docx`);
 }
 </script>
 </body>
